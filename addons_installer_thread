@@ -42,6 +42,16 @@ It will fetch its contents from https://github.com/FreeCAD/FreeCAD-addons
 You need a working internet connection, and the python-git package
 installed.
 '''
+'''
+        for root, dirs, files in os.walk(clonedir):
+            for file in files:
+                if file.lower().endswith('.fcmacro'):
+                    print(file)
+                    src = clonedir + os.sep + file
+                    dst = FreeCAD.ParamGet('User parameter:BaseApp/Preferences/Macro').GetString('MacroPath')
+                    dst = dst + os.sep + file
+                    os.symlink(src, dst)
+'''
 
 from PySide import QtCore, QtGui
 import FreeCAD,urllib2,re,os
